@@ -1,25 +1,15 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { SpotifyService } from 'src/app/services/spotify.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-  paises: any[] = [];
 
-  constructor( private http: HttpClient ) {
+  constructor( private spotify: SpotifyService ) {
 
-    this.http.get('https://restcountries.eu/rest/v2/lang/es')
-      .subscribe( (resp: any) => {
-        this.paises = resp;
-        console.log(resp);
-      });
-
+    this.spotify.getNewReleases();
   }
-
-  ngOnInit(): void {
-  }
-
 }
